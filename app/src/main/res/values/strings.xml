@@ -1,0 +1,10 @@
+<resources>
+  <string name="app_name">EspressoTests</string>
+  <string name="username">username</string>
+  <string name="usernameHint">username hint</string>
+  <string name="password">password</string>
+  <string name="passwordHint">password hint</string>
+  <string name="signIn">sign in</string>
+  <string name="hello">hello there!</string>
+  <string name="emptyFieldsMsg">hey, there are still some empty fields</string>
+</resources>

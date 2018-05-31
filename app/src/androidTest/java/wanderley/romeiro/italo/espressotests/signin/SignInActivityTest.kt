@@ -16,7 +16,7 @@ class SignInActivityTest {
 
     @Test
     @Throws(Exception::class)
-    fun verifyFormIntegrity() {
+    fun signIn_checkFormIntegrity() {
         SignInViewAnalyserRobot()
             .analyseTexts()
             .analyseFields()
@@ -26,7 +26,7 @@ class SignInActivityTest {
 
     @Test
     @Throws(Exception::class)
-    fun tryToGoWithEmptyFields() {
+    fun signIn_emptyFields() {
         val robot = SignInFormFillerRobot()
 
         val userData = arrayOf("abc", "abc")
@@ -43,7 +43,7 @@ class SignInActivityTest {
 
     @Test
     @Throws(Exception::class)
-    fun tryToGoWithOkFields() {
+    fun signIn_filledFields() {
         val robot = SignInFormFillerRobot()
         robot.fillUsernameInForm("abc").fillPasswordInForm("abc").hasNoErrorMsg()
 

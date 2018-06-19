@@ -45,8 +45,8 @@ fun ViewInteraction.checkText(msgStringId: Int, vararg extraContent: String, isH
 
 // KEYBOARD
 fun ViewInteraction.dismissKeyboard(isScrolling: Boolean): ViewInteraction = when {
-    isScrolling -> perform(closeSoftKeyboard(), scrollTo())
-    else -> perform(closeSoftKeyboard())
+  isScrolling -> perform(closeSoftKeyboard(), scrollTo())
+  else -> perform(closeSoftKeyboard())
 }
 
 // IMAGE
@@ -62,22 +62,22 @@ fun ViewInteraction.checkImageData(drawableId: Int): ViewInteraction =
 
 // EDIT TEXT
 fun ViewInteraction.typeText(text: String, isScrolling: Boolean = false): ViewInteraction = when {
-    isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.typeText(text), closeSoftKeyboard())
-    else -> perform(closeSoftKeyboard(), ViewActions.typeText(text), closeSoftKeyboard())
+  isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.typeText(text), closeSoftKeyboard())
+  else -> perform(closeSoftKeyboard(), ViewActions.typeText(text), closeSoftKeyboard())
 }
 
 fun ViewInteraction.replaceText(text: String, isScrolling: Boolean = false): ViewInteraction = when {
-    isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.replaceText(text), closeSoftKeyboard())
-    else -> perform(closeSoftKeyboard(), ViewActions.replaceText(text), closeSoftKeyboard())
+  isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.replaceText(text), closeSoftKeyboard())
+  else -> perform(closeSoftKeyboard(), ViewActions.replaceText(text), closeSoftKeyboard())
 }
 
 // BUTTON
 fun ViewInteraction.checkButtonData(isEnabled: Boolean, msgStringId: Int, vararg extraContent: String): ViewInteraction = check(matches(allOf(isDisplayed(), when {
-    isEnabled -> isEnabled()
-    else -> not(isEnabled())
+  isEnabled -> isEnabled()
+  else -> not(isEnabled())
 }, withTextAndParameters(resourceId = msgStringId, extraContent = *extraContent))))
 
 fun ViewInteraction.clickOnButton(isScrolling: Boolean = false): ViewInteraction = when {
-    isScrolling -> perform(closeSoftKeyboard(), scrollTo(), click())
-    else -> perform(closeSoftKeyboard(), click())
+  isScrolling -> perform(closeSoftKeyboard(), scrollTo(), click())
+  else -> perform(closeSoftKeyboard(), click())
 }

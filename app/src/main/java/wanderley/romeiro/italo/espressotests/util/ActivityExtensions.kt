@@ -2,8 +2,14 @@ package wanderley.romeiro.italo.espressotests.util
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+
+fun <T> Activity.navigateTo(context: Context, clazz: Class<T>) {
+  val intent = Intent(context, clazz)
+  startActivity(intent)
+}
 
 fun Activity.showKeyboard(view: View) {
   if (view.requestFocus()) {

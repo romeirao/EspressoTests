@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item android:drawable="@android:color/black"/>
+
+  <item android:right="16dp" android:left="16dp">
+    <bitmap
+      android:gravity="center"
+      android:src="@drawable/wow_legion"/>
+  </item>
+
+</layer-list>

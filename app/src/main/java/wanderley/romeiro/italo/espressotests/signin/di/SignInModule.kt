@@ -8,7 +8,7 @@ import wanderley.romeiro.italo.espressotests.signin.SignInView
 @Module
 class SignInModule(private val signInView: SignInView) {
 
-  @Provides
-  @ActivityScope
-  fun provideSignInView() = signInView
+    @Provides
+    @ActivityScope
+    fun provideSignInView() = signInView
 }

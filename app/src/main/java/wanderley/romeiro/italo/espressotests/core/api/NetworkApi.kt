@@ -6,7 +6,7 @@ import javax.inject.Inject
 @ApplicationScope
 class NetworkApi @Inject constructor() {
 
-  fun validateUser(username: String, password: String): Boolean {
-    return !username.isEmpty()
-  }
+    fun validateUser(username: String, password: String): Boolean {
+        return !username.isEmpty()
+    }
 }

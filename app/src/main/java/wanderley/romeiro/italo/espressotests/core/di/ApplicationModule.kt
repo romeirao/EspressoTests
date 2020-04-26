@@ -9,7 +9,7 @@ import wanderley.romeiro.italo.espressotests.core.di.annotations.ApplicationScop
 @Module
 class ApplicationModule(private val app: EspressoTestsApplication) {
 
-  @Provides
-  @ApplicationScope
-  fun provideContext(): Context = app
+    @Provides
+    @ApplicationScope
+    fun provideContext(): Context = app
 }

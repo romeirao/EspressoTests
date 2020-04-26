@@ -8,5 +8,5 @@ import wanderley.romeiro.italo.espressotests.signin.SignInActivity
 @ActivityScope
 @Component(modules = [SignInModule::class], dependencies = [ApplicationComponent::class])
 interface SignInComponent {
-  fun inject(view: SignInActivity)
+    fun inject(view: SignInActivity)
 }

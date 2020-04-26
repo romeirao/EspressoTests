@@ -1,14 +1,14 @@
 package wanderley.romeiro.italo.espressotests.util.robot.extension
 
-import android.support.test.espresso.ViewInteraction
-import android.support.test.espresso.action.ViewActions
-import android.support.test.espresso.action.ViewActions.click
-import android.support.test.espresso.action.ViewActions.closeSoftKeyboard
-import android.support.test.espresso.action.ViewActions.scrollTo
-import android.support.test.espresso.assertion.ViewAssertions.doesNotExist
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.isEnabled
+import androidx.test.espresso.ViewInteraction
+import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
+import androidx.test.espresso.action.ViewActions.scrollTo
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.isEnabled
 import org.hamcrest.core.AllOf.allOf
 import org.hamcrest.core.IsNot.not
 
@@ -45,8 +45,8 @@ fun ViewInteraction.checkText(msgStringId: Int, vararg extraContent: String, isH
 
 // KEYBOARD
 fun ViewInteraction.dismissKeyboard(isScrolling: Boolean): ViewInteraction = when {
-  isScrolling -> perform(closeSoftKeyboard(), scrollTo())
-  else -> perform(closeSoftKeyboard())
+    isScrolling -> perform(closeSoftKeyboard(), scrollTo())
+    else -> perform(closeSoftKeyboard())
 }
 
 // IMAGE
@@ -62,22 +62,22 @@ fun ViewInteraction.checkImageData(drawableId: Int): ViewInteraction =
 
 // EDIT TEXT
 fun ViewInteraction.typeText(text: String, isScrolling: Boolean = false): ViewInteraction = when {
-  isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.typeText(text), closeSoftKeyboard())
-  else -> perform(closeSoftKeyboard(), ViewActions.typeText(text), closeSoftKeyboard())
+    isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.typeText(text), closeSoftKeyboard())
+    else -> perform(closeSoftKeyboard(), ViewActions.typeText(text), closeSoftKeyboard())
 }
 
 fun ViewInteraction.replaceText(text: String, isScrolling: Boolean = false): ViewInteraction = when {
-  isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.replaceText(text), closeSoftKeyboard())
-  else -> perform(closeSoftKeyboard(), ViewActions.replaceText(text), closeSoftKeyboard())
+    isScrolling -> perform(closeSoftKeyboard(), scrollTo(), ViewActions.replaceText(text), closeSoftKeyboard())
+    else -> perform(closeSoftKeyboard(), ViewActions.replaceText(text), closeSoftKeyboard())
 }
 
 // BUTTON
 fun ViewInteraction.checkButtonData(isEnabled: Boolean, msgStringId: Int, vararg extraContent: String): ViewInteraction = check(matches(allOf(isDisplayed(), when {
-  isEnabled -> isEnabled()
-  else -> not(isEnabled())
+    isEnabled -> isEnabled()
+    else -> not(isEnabled())
 }, withTextAndParameters(resourceId = msgStringId, extraContent = *extraContent))))
 
 fun ViewInteraction.clickOnButton(isScrolling: Boolean = false): ViewInteraction = when {
-  isScrolling -> perform(closeSoftKeyboard(), scrollTo(), click())
-  else -> perform(closeSoftKeyboard(), click())
+    isScrolling -> perform(closeSoftKeyboard(), scrollTo(), click())
+    else -> perform(closeSoftKeyboard(), click())
 }

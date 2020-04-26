@@ -7,5 +7,5 @@ import wanderley.romeiro.italo.espressotests.core.di.annotations.ApplicationScop
 @ApplicationScope
 @Component(modules = [ApplicationModule::class])
 interface ApplicationComponent {
-  fun context(): Context
+    fun context(): Context
 }

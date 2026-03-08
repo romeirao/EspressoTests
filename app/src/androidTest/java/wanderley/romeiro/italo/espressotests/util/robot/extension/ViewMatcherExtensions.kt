@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import org.hamcrest.Description
 import org.hamcrest.TypeSafeMatcher
-import wanderley.romeiro.italo.espressotests.util.logError
+import timber.log.Timber
 
 fun withDrawable(expectedDrawableId: Int) = object : TypeSafeMatcher<View>() {
     private var resourceName: String? = null
@@ -22,7 +22,7 @@ fun withDrawable(expectedDrawableId: Int) = object : TypeSafeMatcher<View>() {
         try {
             resourceName = resources.getResourceEntryName(expectedDrawableId)
         } catch (e: Resources.NotFoundException) {
-            logError(e, "[ViewMatchers]")
+            Timber.tag("ViewMatchers").e(e)
             return false
         }
 
@@ -36,7 +36,11 @@ fun withDrawable(expectedDrawableId: Int) = object : TypeSafeMatcher<View>() {
     }
 
     private fun getBitmap(drawable: Drawable): Bitmap {
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)
@@ -54,43 +58,44 @@ fun withDrawable(expectedDrawableId: Int) = object : TypeSafeMatcher<View>() {
     }
 }
 
-fun withTextAndParameters(resourceId: Int, vararg extraContent: String, isHint: Boolean = false) = object : TypeSafeMatcher<View>() {
-    private var resourceName: String? = null
-    private var expectedText: String? = null
+fun withTextAndParameters(resourceId: Int, vararg extraContent: String, isHint: Boolean = false) =
+    object : TypeSafeMatcher<View>() {
+        private var resourceName: String? = null
+        private var expectedText: String? = null
 
-    public override fun matchesSafely(target: View): Boolean {
-        if (target !is TextView) return false
+        public override fun matchesSafely(target: View): Boolean {
+            if (target !is TextView) return false
 
-        val resources = target.context.resources
-        try {
-            resourceName = resources.getResourceEntryName(resourceId)
-            expectedText = resources.getString(resourceId, extraContent)
-        } catch (e: Resources.NotFoundException) {
-            logError(e, "[ViewMatcherExtensions][withTextAndParameters]")
-            return false
+            val resources = target.context.resources
+            try {
+                resourceName = resources.getResourceEntryName(resourceId)
+                expectedText = resources.getString(resourceId, extraContent)
+            } catch (e: Resources.NotFoundException) {
+                Timber.tag("ViewMatcherExtensions").e(e, "[withTextAndParameters]")
+                return false
+            }
+
+            val currentText = when {
+                isHint -> target.hint.toString()
+                else -> target.text.toString()
+            }
+
+            return when {
+                expectedText.isNullOrBlank() || currentText.isBlank() -> false
+                else -> expectedText.equals(currentText)
+            }
         }
 
-        val currentText = when {
-            isHint -> target.hint.toString()
-            else -> target.text.toString()
-        }
-
-        return when {
-            expectedText.isNullOrBlank() || currentText.isBlank() -> false
-            else -> expectedText.equals(currentText)
+        override fun describeTo(description: Description) {
+            if (null != resourceName) {
+                description.appendText("resourceName: [")
+                description.appendText(resourceName)
+                description.appendText("]")
+            }
+            if (null != expectedText) {
+                description.appendText(" value: [")
+                description.appendText(expectedText)
+                description.appendText("]")
+            }
         }
     }
-
-    override fun describeTo(description: Description) {
-        if (null != resourceName) {
-            description.appendText("resourceName: [")
-            description.appendText(resourceName)
-            description.appendText("]")
-        }
-        if (null != expectedText) {
-            description.appendText(" value: [")
-            description.appendText(expectedText)
-            description.appendText("]")
-        }
-    }
-}

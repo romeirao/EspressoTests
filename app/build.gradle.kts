@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.tracing)
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.timber)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)

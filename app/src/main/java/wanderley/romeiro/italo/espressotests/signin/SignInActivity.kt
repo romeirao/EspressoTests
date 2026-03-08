@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import timber.log.Timber
 import wanderley.romeiro.italo.espressotests.R
 import wanderley.romeiro.italo.espressotests.core.di.Injector
 import wanderley.romeiro.italo.espressotests.dashboard.DashboardActivity
@@ -46,7 +46,7 @@ class SignInActivity : AppCompatActivity(), SignInView {
             initPresenter(savedInstanceState)
             initView()
         } catch (e: Exception) {
-            Log.e("SignInActivity", "Initialization failed", e)
+            Timber.e(e, "Initialization failed")
             // Activity will display but without full functionality
         }
     }

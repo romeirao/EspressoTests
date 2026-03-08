@@ -1,22 +1,22 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-27-alpha
+      - image: cimg/android:2024.10
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum "app/build.gradle.kts" }}-{{ checksum "gradle/libs.versions.toml" }}
       - run:
           name: Download Dependencies
-          command: ./gradlew androidDependencies
+          command: ./gradlew help
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum "app/build.gradle.kts" }}-{{ checksum "gradle/libs.versions.toml" }}
       - run:
           name: Run Tests
           command: ./gradlew lint test

@@ -1,8 +1,10 @@
 package wanderley.romeiro.italo.espressotests.signin
 
+import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
-import org.junit.Rule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.uiautomator.UiDevice
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import wanderley.romeiro.italo.espressotests.signin.robot.SignInFormFillerRobot
@@ -11,8 +13,17 @@ import wanderley.romeiro.italo.espressotests.signin.robot.SignInViewAnalyserRobo
 @RunWith(AndroidJUnit4::class)
 class SignInActivityTest {
 
-    @get:Rule
-    var activityRule: ActivityTestRule<SignInActivity> = ActivityTestRule(SignInActivity::class.java)
+    private lateinit var scenario: ActivityScenario<SignInActivity>
+
+    @Before
+    fun setUp() {
+        val uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        uiDevice.wakeUp()
+        uiDevice.executeShellCommand("wm dismiss-keyguard")
+        Thread.sleep(2000)
+        scenario = ActivityScenario.launch(SignInActivity::class.java)
+        Thread.sleep(1000) // Wait for activity to fully load
+    }
 
     @Test
     @Throws(Exception::class)
